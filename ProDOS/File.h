@@ -85,7 +85,10 @@ public:
     uint8_t xFInfo[16];
 };
 
-
+/**
+ * This class represents the volume directory header.
+ * @see The ProDOS II Technical Reference Manual
+ */
 class VolumeEntry {
 public:
     
@@ -102,6 +105,8 @@ public:
     unsigned entry_length;
     unsigned entries_per_block;
     unsigned file_count;
+
+    /** the block number (zero based) of the bit map */
     unsigned bit_map_pointer;
     unsigned total_blocks;
 

@@ -3,7 +3,10 @@
 
 #include <pthread.h>
 
-
+/**
+ * A basic mutex.
+ * Recursive locking is not supported and has undefined behavior.
+ */
 class Lock {
 public:
     Lock();

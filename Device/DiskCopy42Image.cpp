@@ -54,6 +54,12 @@ DiskCopy42Image::~DiskCopy42Image()
     }
 }
 
+/**
+ * Calculate the 32-bit checksum of a buffer.
+ * @param data the buffer
+ * @param size the number of bytes in the buffer to examine
+ * @return the checksum
+ */
 uint32_t DiskCopy42Image::Checksum(void *data, size_t size)
 {
     uint32_t rv = 0;

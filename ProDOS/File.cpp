@@ -19,7 +19,12 @@
 
 using namespace LittleEndian;
 
-
+/**
+ * Load a volume entry from a buffer.
+ *
+ * @param data a pointer to the start of the volume entry (does not include the block pointers)
+ * @return true on success (never fails)
+ */
 bool FileEntry::Load(const void *data)
 {
     const uint8_t *cp = (const uint8_t *)data;

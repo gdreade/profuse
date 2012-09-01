@@ -103,7 +103,13 @@ int Disk::Normalize(FileEntry &f, unsigned fork, ExtendedEntry *ee)
  
 }
 
-
+/**
+ * Read the value of a disk block into a buffer.
+ *
+ * @param block the block number to read (zero based)
+ * @param buffer the buffer into which to place the data.  Must be at least BLOCK_SIZE bytes long
+ * @return 1 on success, -P8_INVALID_BLOCK if the block number is not valid
+ */
 int Disk::Read(unsigned block, void *buffer)
 {
 
@@ -329,22 +335,32 @@ int Disk::ReadIndex(unsigned block, void *buffer, unsigned level, off_t offset, 
 }
 
 
-
+/**
+ * @param volume
+ * @param files
+ * @return negative if there was a problem reading the volume
+ */
 int Disk::ReadVolume(VolumeEntry *volume, std::vector<FileEntry> *files)
 {
     if (files) files->resize(0);
     
     uint8_t buffer[BLOCK_SIZE];
     int ok;
+
+    // "previous" block pointer
     unsigned prev;
+
+    // "next" block pointer
     unsigned next;
     
     uset blocks; 
 
+    // read volume key block
     unsigned block = 2;
     blocks.insert(block);
     ok = Read(block, buffer);
     
+    // bad read?
     if (ok < 0) return ok;
     
     prev = Read16(&buffer[0x00]);

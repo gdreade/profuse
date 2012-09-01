@@ -46,6 +46,9 @@ enum {
 class Disk;
 typedef std::tr1::shared_ptr<Disk> DiskPointer;
 
+/**
+ * The Disk class represents the disk image on which the prodos filesystem has been placed.
+ */
 class Disk {
 
 public:
